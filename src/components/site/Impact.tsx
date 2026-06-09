@@ -46,34 +46,38 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 
 export function Impact() {
   return (
-    <section id="impacto" className="py-24 bg-gradient-brand text-primary-foreground relative overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 20% 20%, white 1px, transparent 1px), radial-gradient(circle at 80% 70%, white 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-        aria-hidden="true"
-      />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto">
-          <span className="text-sm font-semibold uppercase tracking-widest text-white/80">
-            Nuestro impacto
-          </span>
-          <h2 className="mt-3 text-4xl sm:text-5xl font-bold">
-            Cifras que hablan por nuestras comunidades
-          </h2>
+    <section id="impacto" className="py-24 lg:py-32 bg-background">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        <div className="grid lg:grid-cols-12 gap-8 mb-14">
+          <div className="lg:col-span-3">
+            <span className="block text-[11px] uppercase tracking-[0.25em] font-bold text-primary">
+              05 — Impacto
+            </span>
+            <div className="mt-4 h-px w-16 bg-foreground" />
+          </div>
+          <div className="lg:col-span-9">
+            <h2 className="font-display font-black text-[clamp(2rem,5vw,4.5rem)] leading-[1] tracking-[-0.03em] text-foreground">
+              Cifras que hablan por nuestras{" "}
+              <span className="italic text-secondary">comunidades</span>.
+            </h2>
+          </div>
         </div>
 
-        <dl className="mt-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-          {stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <dt className="sr-only">{s.label}</dt>
-              <dd className="font-display text-4xl sm:text-5xl font-extrabold">
+        <dl className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-px bg-border rounded-3xl overflow-hidden border border-border">
+          {stats.map((s, i) => (
+            <div
+              key={s.label}
+              className={`p-8 flex flex-col gap-3 ${i === 1 ? "bg-primary text-primary-foreground" : i === 3 ? "bg-gradient-gold text-foreground" : "bg-background"}`}
+            >
+              <span className="text-[11px] uppercase tracking-[0.2em] font-bold opacity-70">
+                0{i + 1}
+              </span>
+              <dd className="font-display font-black text-5xl lg:text-6xl tracking-[-0.04em] leading-none">
                 <Counter value={s.value} suffix={s.suffix} />
               </dd>
-              <p className="mt-2 text-sm text-white/85">{s.label}</p>
+              <dt className="text-sm font-semibold leading-snug mt-auto">
+                {s.label}
+              </dt>
             </div>
           ))}
         </dl>

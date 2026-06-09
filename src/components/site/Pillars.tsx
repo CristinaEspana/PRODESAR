@@ -5,92 +5,88 @@ import { TreePine, TrendingUp, Users2 } from "lucide-react";
 
 const pillars = [
   {
+    n: "01",
     icon: TreePine,
-    title: "Pilar Ambiental",
+    title: "Ambiental",
     image: ambImg,
-    desc: "Conservar la biodiversidad y garantizar que el uso de los recursos naturales como el agua, los bosques y la energía no supere su capacidad de regeneración.",
-    tags: ["Bosques", "Agua", "Energías renovables", "Biodiversidad"],
+    desc: "Conservar la biodiversidad y garantizar que el uso de los recursos naturales no supere su capacidad de regeneración.",
+    tags: ["Bosques", "Agua", "Energía", "Biodiversidad"],
+    accent: "bg-secondary text-secondary-foreground",
   },
   {
+    n: "02",
     icon: TrendingUp,
-    title: "Pilar Económico",
+    title: "Económico",
     image: ecoImg,
-    desc: "Promover un crecimiento económico sostenible que genere oportunidades, empleo y prosperidad sin comprometer los recursos de las futuras generaciones.",
-    tags: ["Emprendimiento", "Innovación", "Productividad", "Empresa"],
+    desc: "Promover un crecimiento sostenible que genere oportunidades, empleo y prosperidad sin comprometer al futuro.",
+    tags: ["Emprendimiento", "Innovación", "Productividad"],
+    accent: "bg-foreground text-background",
   },
   {
+    n: "03",
     icon: Users2,
-    title: "Pilar Social",
+    title: "Social",
     image: socImg,
-    desc: "Fomentar la inclusión, reducir las desigualdades y mejorar la calidad de vida mediante proyectos que fortalezcan a las comunidades.",
+    desc: "Fomentar la inclusión, reducir desigualdades y mejorar la calidad de vida mediante proyectos que fortalezcan comunidades.",
     tags: ["Educación", "Liderazgo", "Equidad", "Bienestar"],
+    accent: "bg-primary text-primary-foreground",
   },
 ];
 
 export function Pillars() {
   return (
-    <section id="pilares" className="py-24 bg-muted/40 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-brand-soft opacity-40" aria-hidden="true" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="text-sm font-semibold uppercase tracking-widest text-primary">
-            Desarrollo sostenible
-          </span>
-          <h2 className="mt-3 text-4xl sm:text-5xl font-bold text-foreground">
-            Los tres pilares que <span className="text-gradient-brand">sostienen</span> nuestro trabajo
-          </h2>
-          <p className="mt-5 text-lg text-muted-foreground">
-            El equilibrio entre lo ambiental, lo económico y lo social es la base de cada proyecto
-            que diseñamos y ejecutamos.
-          </p>
+    <section id="pilares" className="py-24 lg:py-32 bg-surface relative overflow-hidden">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        <div className="grid lg:grid-cols-12 gap-8 mb-16">
+          <div className="lg:col-span-3">
+            <span className="block text-[11px] uppercase tracking-[0.25em] font-bold text-primary">
+              02 — Pilares
+            </span>
+            <div className="mt-4 h-px w-16 bg-foreground" />
+          </div>
+          <div className="lg:col-span-9">
+            <h2 className="font-display font-black text-[clamp(2rem,5vw,4.5rem)] leading-[1] tracking-[-0.03em] text-foreground">
+              Tres dimensiones, un mismo{" "}
+              <span className="italic text-primary">equilibrio</span>.
+            </h2>
+            <p className="mt-6 text-lg text-muted-foreground max-w-2xl">
+              El balance entre lo ambiental, lo económico y lo social es la base de cada proyecto
+              que diseñamos y ejecutamos.
+            </p>
+          </div>
         </div>
 
-        {/* Diagrama */}
-        <div className="mt-14 flex justify-center">
-          <svg viewBox="0 0 400 200" className="w-full max-w-md h-auto" aria-hidden="true">
-            <defs>
-              <linearGradient id="gg" x1="0" x2="1">
-                <stop offset="0" stopColor="oklch(0.72 0.19 140)" />
-                <stop offset="1" stopColor="oklch(0.32 0.12 260)" />
-              </linearGradient>
-            </defs>
-            <circle cx="120" cy="120" r="60" fill="oklch(0.72 0.19 140 / 0.55)" />
-            <circle cx="280" cy="120" r="60" fill="oklch(0.32 0.12 260 / 0.55)" />
-            <circle cx="200" cy="60" r="60" fill="url(#gg)" fillOpacity="0.6" />
-            <text x="120" y="125" textAnchor="middle" fill="white" fontSize="14" fontWeight="700" fontFamily="Poppins">Ambiental</text>
-            <text x="280" y="125" textAnchor="middle" fill="white" fontSize="14" fontWeight="700" fontFamily="Poppins">Social</text>
-            <text x="200" y="60" textAnchor="middle" fill="white" fontSize="14" fontWeight="700" fontFamily="Poppins">Económico</text>
-          </svg>
-        </div>
-
-        <div className="mt-16 grid md:grid-cols-3 gap-6">
-          {pillars.map(({ icon: Icon, title, image, desc, tags }) => (
+        {/* Tarjetas asimétricas tipo magazine */}
+        <div className="grid md:grid-cols-3 gap-5">
+          {pillars.map(({ n, icon: Icon, title, image, desc, tags, accent }, i) => (
             <article
               key={title}
-              className="group relative bg-card rounded-3xl overflow-hidden border border-border shadow-soft hover:shadow-elegant transition-all hover:-translate-y-1"
+              className={`group relative overflow-hidden rounded-3xl border border-border bg-background shadow-card hover:shadow-elegant transition-all ${
+                i === 1 ? "md:translate-y-8" : ""
+              }`}
             >
-              <div className="aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-[5/4] overflow-hidden">
                 <img
                   src={image}
                   alt=""
                   loading="lazy"
                   className="size-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
+                <span className={`absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-[0.18em] ${accent}`}>
+                  <Icon className="h-3.5 w-3.5" aria-hidden /> {title}
+                </span>
+                <span className="absolute top-4 right-4 font-display font-black text-3xl text-white drop-shadow">
+                  {n}
+                </span>
               </div>
-              <div className="p-6">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-brand text-primary-foreground">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <h3 className="text-xl font-bold text-foreground">{title}</h3>
-                </div>
-                <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{desc}</p>
+              <div className="p-7">
+                <h3 className="font-display font-extrabold text-2xl text-foreground">
+                  Pilar {title}
+                </h3>
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{desc}</p>
                 <ul className="mt-5 flex flex-wrap gap-2">
                   {tags.map((t) => (
-                    <li
-                      key={t}
-                      className="text-xs font-medium px-2.5 py-1 rounded-full bg-accent text-accent-foreground"
-                    >
+                    <li key={t} className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border border-border text-foreground/70">
                       {t}
                     </li>
                   ))}

@@ -11,30 +11,30 @@ const allies = [
 
 export function Allies() {
   return (
-    <section id="alianzas" className="py-20 bg-background border-y border-border">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <span className="text-sm font-semibold uppercase tracking-widest text-primary">
-            Alianzas y cooperación
+    <section id="alianzas" className="py-16 bg-surface border-y border-border">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        <div className="flex flex-col md:flex-row md:items-center gap-6 mb-10">
+          <span className="text-[11px] uppercase tracking-[0.25em] font-bold text-primary shrink-0">
+            06 — Alianzas
           </span>
-          <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-foreground">
-            Trabajamos junto a quienes creen en el cambio
-          </h2>
-        </div>
-        <div className="mt-12 overflow-hidden">
-          <div className="flex gap-12 animate-[scroll_30s_linear_infinite] whitespace-nowrap">
-            {[...allies, ...allies].map((a, i) => (
-              <span
-                key={i}
-                className="text-lg font-semibold text-muted-foreground/70 hover:text-primary transition-colors shrink-0"
-              >
-                {a}
-              </span>
-            ))}
-          </div>
+          <div className="hidden md:block h-px flex-1 bg-border" />
+          <p className="text-sm text-muted-foreground">
+            Trabajamos junto a quienes creen en el cambio.
+          </p>
         </div>
       </div>
-      <style>{`@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }`}</style>
+      <div className="overflow-hidden">
+        <div className="flex gap-16 animate-marquee whitespace-nowrap">
+          {[...allies, ...allies].map((a, i) => (
+            <span
+              key={i}
+              className="font-display text-2xl md:text-3xl font-extrabold text-foreground/30 hover:text-foreground transition-colors shrink-0"
+            >
+              {a} <span className="text-brand-gold">·</span>
+            </span>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

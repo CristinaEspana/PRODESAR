@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { z } from "zod";
-import { Mail, Phone, MapPin, Send, Facebook, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Facebook, Instagram, Linkedin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,7 +12,6 @@ const schema = z.object({
   email: z.string().trim().email("Correo inválido").max(255),
   phone: z.string().trim().max(30).optional().or(z.literal("")),
   message: z.string().trim().min(10, "Escribe al menos 10 caracteres").max(1000),
-  // honeypot
   website: z.string().max(0).optional().or(z.literal("")),
 });
 
@@ -36,53 +35,49 @@ export function Contact() {
   };
 
   return (
-    <section id="contacto" className="py-24 bg-muted/40">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12">
-          <div>
-            <span className="text-sm font-semibold uppercase tracking-widest text-primary">
-              Contacto
+    <section id="contacto" className="py-24 lg:py-32 bg-background">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        <div className="grid lg:grid-cols-12 gap-8 mb-14">
+          <div className="lg:col-span-3">
+            <span className="block text-[11px] uppercase tracking-[0.25em] font-bold text-primary">
+              09 — Contacto
             </span>
-            <h2 className="mt-3 text-4xl sm:text-5xl font-bold text-foreground">
-              Hablemos de cómo <span className="text-gradient-brand">colaborar</span>
+            <div className="mt-4 h-px w-16 bg-foreground" />
+          </div>
+          <div className="lg:col-span-9">
+            <h2 className="font-display font-black text-[clamp(2rem,5vw,4.5rem)] leading-[1] tracking-[-0.03em] text-foreground">
+              Hablemos de cómo <span className="italic text-primary">colaborar</span>.
             </h2>
-            <p className="mt-5 text-lg text-muted-foreground">
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-12 gap-10">
+          <div className="lg:col-span-5">
+            <p className="text-lg text-muted-foreground leading-relaxed">
               ¿Tienes una idea, un proyecto o quieres aliarte con nosotros? Escríbenos y te
               responderemos a la brevedad.
             </p>
 
-            <ul className="mt-10 space-y-5 text-sm">
-              <li className="flex items-start gap-4">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-brand text-primary-foreground shrink-0">
-                  <MapPin className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <div>
-                  <p className="font-semibold text-foreground">Dirección</p>
-                  <p className="text-muted-foreground">Calle 123 # 45-67, Bogotá, Colombia</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-4">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-brand text-primary-foreground shrink-0">
-                  <Mail className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <div>
-                  <p className="font-semibold text-foreground">Correo</p>
-                  <a href="mailto:contacto@prodesar.org" className="text-muted-foreground hover:text-primary">
-                    contacto@prodesar.org
-                  </a>
-                </div>
-              </li>
-              <li className="flex items-start gap-4">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-brand text-primary-foreground shrink-0">
-                  <Phone className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <div>
-                  <p className="font-semibold text-foreground">Teléfono</p>
-                  <a href="tel:+5716000000" className="text-muted-foreground hover:text-primary">
-                    +57 1 600 0000
-                  </a>
-                </div>
-              </li>
+            <ul className="mt-10 divide-y divide-border border-y border-border">
+              {[
+                { Icon: MapPin, title: "Dirección", value: "Calle 123 # 45-67, Bogotá, Colombia" },
+                { Icon: Mail, title: "Correo", value: "contacto@prodesar.org", href: "mailto:contacto@prodesar.org" },
+                { Icon: Phone, title: "Teléfono", value: "+57 1 600 0000", href: "tel:+5716000000" },
+              ].map(({ Icon, title, value, href }) => (
+                <li key={title} className="py-5 flex items-center gap-5">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-accent-foreground shrink-0">
+                    <Icon className="h-5 w-5" aria-hidden />
+                  </span>
+                  <div className="flex-1">
+                    <p className="text-[11px] uppercase tracking-[0.2em] font-bold text-muted-foreground">{title}</p>
+                    {href ? (
+                      <a href={href} className="block font-semibold text-foreground hover:text-primary">{value}</a>
+                    ) : (
+                      <p className="font-semibold text-foreground">{value}</p>
+                    )}
+                  </div>
+                </li>
+              ))}
             </ul>
 
             <div className="mt-8 flex gap-3">
@@ -95,14 +90,14 @@ export function Contact() {
                   key={label}
                   href="#"
                   aria-label={label}
-                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-card border border-border text-foreground hover:bg-gradient-brand hover:text-primary-foreground hover:border-transparent transition-colors"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl border border-border text-foreground hover:bg-foreground hover:text-background transition-colors"
                 >
-                  <Icon className="h-5 w-5" aria-hidden="true" />
+                  <Icon className="h-5 w-5" aria-hidden />
                 </a>
               ))}
             </div>
 
-            <div className="mt-8 overflow-hidden rounded-2xl border border-border shadow-soft">
+            <div className="mt-8 overflow-hidden rounded-2xl border border-border">
               <iframe
                 title="Mapa ubicación PRODESAR"
                 src="https://www.openstreetmap.org/export/embed.html?bbox=-74.10%2C4.60%2C-74.02%2C4.68&amp;layer=mapnik"
@@ -114,35 +109,37 @@ export function Contact() {
 
           <form
             onSubmit={onSubmit}
-            className="p-8 sm:p-10 rounded-3xl bg-card border border-border shadow-elegant"
+            className="lg:col-span-7 p-8 sm:p-10 rounded-3xl bg-surface border border-border"
             noValidate
           >
-            <h3 className="text-2xl font-bold text-foreground">Envíanos un mensaje</h3>
+            <h3 className="font-display font-extrabold text-3xl text-foreground">
+              Envíanos un mensaje
+            </h3>
             <p className="mt-2 text-sm text-muted-foreground">
               Completa el formulario y nuestro equipo se pondrá en contacto.
             </p>
-            <div className="mt-6 grid gap-5">
-              <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+            <div className="mt-8 grid gap-5">
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
               <div>
-                <Label htmlFor="name">Nombre</Label>
-                <Input id="name" name="name" required maxLength={100} className="mt-2" placeholder="Tu nombre completo" />
+                <Label htmlFor="name" className="text-[11px] uppercase tracking-[0.18em] font-bold text-muted-foreground">Nombre</Label>
+                <Input id="name" name="name" required maxLength={100} className="mt-2 bg-background h-12" placeholder="Tu nombre completo" />
               </div>
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
-                  <Label htmlFor="email">Correo electrónico</Label>
-                  <Input id="email" name="email" type="email" required maxLength={255} className="mt-2" placeholder="tu@correo.com" />
+                  <Label htmlFor="email" className="text-[11px] uppercase tracking-[0.18em] font-bold text-muted-foreground">Correo</Label>
+                  <Input id="email" name="email" type="email" required maxLength={255} className="mt-2 bg-background h-12" placeholder="tu@correo.com" />
                 </div>
                 <div>
-                  <Label htmlFor="phone">Teléfono</Label>
-                  <Input id="phone" name="phone" type="tel" maxLength={30} className="mt-2" placeholder="+57 300 000 0000" />
+                  <Label htmlFor="phone" className="text-[11px] uppercase tracking-[0.18em] font-bold text-muted-foreground">Teléfono</Label>
+                  <Input id="phone" name="phone" type="tel" maxLength={30} className="mt-2 bg-background h-12" placeholder="+57 300 000 0000" />
                 </div>
               </div>
               <div>
-                <Label htmlFor="message">Mensaje</Label>
-                <Textarea id="message" name="message" required minLength={10} maxLength={1000} rows={5} className="mt-2" placeholder="Cuéntanos en qué podemos ayudarte..." />
+                <Label htmlFor="message" className="text-[11px] uppercase tracking-[0.18em] font-bold text-muted-foreground">Mensaje</Label>
+                <Textarea id="message" name="message" required minLength={10} maxLength={1000} rows={5} className="mt-2 bg-background" placeholder="Cuéntanos en qué podemos ayudarte..." />
               </div>
-              <Button type="submit" disabled={loading} size="lg" className="bg-gradient-brand text-primary-foreground hover:opacity-90 min-h-11">
-                {loading ? "Enviando…" : (<>Enviar mensaje <Send className="ml-2 h-4 w-4" /></>)}
+              <Button type="submit" disabled={loading} size="lg" className="group bg-foreground text-background hover:bg-primary min-h-12 rounded-full font-bold">
+                {loading ? "Enviando…" : (<>Enviar mensaje <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" /></>)}
               </Button>
             </div>
           </form>
