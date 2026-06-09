@@ -4,7 +4,7 @@ import { ArrowRight, Leaf } from "lucide-react";
 
 export function Hero() {
   return (
-    <section id="inicio" className="relative min-h-dvh flex items-center overflow-hidden pt-16">
+    <section id="inicio" className="relative min-h-dvh flex items-center overflow-hidden pt-24">
       <img
         src={heroImg}
         alt="Comunidad rural plantando árboles en un valle andino al amanecer"
