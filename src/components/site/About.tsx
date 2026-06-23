@@ -11,83 +11,62 @@ const values = [
 
 export function About() {
   return (
-    <section id="quienes-somos" className="py-24 lg:py-32 bg-background">
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-        {/* eyebrow */}
-        <div className="grid lg:grid-cols-12 gap-8 mb-16">
-          <div className="lg:col-span-3">
-            <span className="block text-[11px] uppercase tracking-[0.25em] font-bold text-primary">
-              01 — Quiénes somos
+    <section id="quienes-somos" className="py-24 bg-background">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div>
+            <span className="text-sm font-semibold uppercase tracking-widest text-primary">
+              Quiénes somos
             </span>
-            <div className="mt-4 h-px w-16 bg-foreground" />
-          </div>
-          <div className="lg:col-span-9">
-            <h2 className="font-display font-black text-[clamp(2rem,5vw,4.5rem)] leading-[1] tracking-[-0.03em] text-foreground">
-              Una fundación al servicio del{" "}
-              <span className="italic text-secondary">desarrollo sostenible</span>.
+            <h2 className="mt-3 text-4xl sm:text-5xl font-bold text-foreground">
+              Una <span className="text-gradient-brand">fundación</span> al servicio del desarrollo sostenible
             </h2>
-          </div>
-        </div>
-
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
-          {/* Texto introductorio + Misión/Visión */}
-          <div className="lg:col-span-7 lg:col-start-4">
-            <p className="text-xl text-muted-foreground leading-relaxed first-letter:font-display first-letter:text-7xl first-letter:font-black first-letter:text-primary first-letter:float-left first-letter:leading-[0.9] first-letter:mr-3 first-letter:mt-1">
-              PRODESAR nace con el propósito de impulsar iniciativas que integren el crecimiento
-              económico, la inclusión social y la conservación ambiental. Trabajamos junto a las
-              comunidades para diseñar y ejecutar proyectos que transforman ideas en oportunidades reales.
+            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+              PRODESAR — Fundación Proyectos y Desarrollo — nace con el propósito de impulsar
+              iniciativas que integren el crecimiento económico, la inclusión social y la
+              conservación ambiental. Trabajamos junto a las comunidades para diseñar y ejecutar
+              proyectos que transforman ideas en oportunidades reales.
             </p>
 
-            <div className="mt-12 grid sm:grid-cols-2 gap-5">
-              <article className="p-7 rounded-2xl bg-surface border border-border">
-                <span className="text-[11px] uppercase tracking-[0.22em] font-bold text-primary">Misión</span>
-                <p className="mt-3 text-base text-foreground leading-relaxed">
-                  Formular y ejecutar proyectos sostenibles que generen impacto social, ambiental
-                  y económico, fortaleciendo capacidades y oportunidades duraderas.
+            <div className="mt-10 grid sm:grid-cols-2 gap-6">
+              <div className="p-6 rounded-2xl bg-accent border border-border">
+                <h3 className="font-semibold text-lg text-foreground">Misión</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                  Formular y ejecutar proyectos sostenibles que generen impacto social, ambiental y
+                  económico en las comunidades, fortaleciendo sus capacidades y construyendo
+                  oportunidades duraderas.
                 </p>
-              </article>
-              <article className="p-7 rounded-2xl bg-foreground text-background border border-foreground">
-                <span className="text-[11px] uppercase tracking-[0.22em] font-bold text-brand-gold">Visión</span>
-                <p className="mt-3 text-base leading-relaxed">
-                  Ser una organización líder en desarrollo sostenible, reconocida por su
-                  transparencia, innovación y compromiso con el bienestar colectivo.
+              </div>
+              <div className="p-6 rounded-2xl bg-gradient-brand-soft border border-border">
+                <h3 className="font-semibold text-lg text-foreground">Visión</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                  Ser una organización líder en la formulación y ejecución de proyectos de
+                  desarrollo sostenible, reconocida por su transparencia, innovación y compromiso
+                  con el bienestar colectivo.
                 </p>
-              </article>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Valores en grid editorial */}
-        <div className="mt-20 lg:mt-28 border-t border-border pt-10">
-          <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
-            <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-foreground">
-              Valores institucionales
-            </h3>
-            <span className="text-xs uppercase tracking-[0.22em] font-bold text-muted-foreground">
-              06 principios
-            </span>
+          <div>
+            <h3 className="text-2xl font-bold text-foreground">Valores institucionales</h3>
+            <p className="mt-3 text-muted-foreground">
+              Principios que guían cada uno de nuestros proyectos y relaciones.
+            </p>
+            <ul className="mt-8 grid grid-cols-2 gap-4">
+              {values.map(({ icon: Icon, label }) => (
+                <li
+                  key={label}
+                  className="group flex items-center gap-3 p-4 rounded-xl bg-card border border-border hover:border-primary/40 hover:shadow-soft transition-all"
+                >
+                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-green text-primary-foreground shrink-0">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span className="font-medium text-foreground">{label}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-
-          <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-border rounded-3xl overflow-hidden">
-            {values.map(({ icon: Icon, label }, i) => (
-              <li
-                key={label}
-                className="group bg-background p-6 flex flex-col gap-4 hover:bg-accent transition-colors"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-                    <Icon className="h-5 w-5" aria-hidden />
-                  </span>
-                  <span className="text-[11px] font-bold text-muted-foreground tabular-nums">
-                    0{i + 1}
-                  </span>
-                </div>
-                <span className="font-display font-bold text-base text-foreground leading-tight">
-                  {label}
-                </span>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>
