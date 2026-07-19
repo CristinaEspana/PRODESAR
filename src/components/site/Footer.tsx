@@ -1,4 +1,4 @@
-import logoAsset from "@/assets/prodesar-logo.png.asset.json";
+import logoAsset from "@/assets/prodesar-logo.png";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 export function Footer() {
@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3">
-              <img src={logoAsset.url} alt="Logo PRODESAR" className="h-12 w-12 object-contain bg-white rounded-lg p-1" />
+              <img src={logoAsset} alt="Logo PRODESAR" className="h-12 w-12 object-contain bg-white rounded-lg p-1" />
               <div>
                 <p className="font-display font-bold text-xl">PRODESAR</p>
                 <p className="text-xs text-white/70">Fundación Proyectos y Desarrollo</p>

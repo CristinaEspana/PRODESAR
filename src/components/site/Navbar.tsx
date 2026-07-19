@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import logoAsset from "@/assets/prodesar-logo.png.asset.json";
+import logoAsset from "@/assets/prodesar-logo.png";
 import { Button } from "@/components/ui/button";
 
 const links = [
@@ -34,7 +34,7 @@ export function Navbar() {
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <a href="#inicio" className="flex items-center gap-2" aria-label="PRODESAR inicio">
-          <img src={logoAsset.url} alt="Logo PRODESAR" className="h-10 w-10 object-contain" />
+          <img src={logoAsset} alt="Logo PRODESAR" className="h-10 w-10 object-contain" />
           <span className="font-display font-bold text-lg tracking-tight text-foreground">
             PRO<span className="text-secondary">DESAR</span>
           </span>
