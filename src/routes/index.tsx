@@ -12,8 +12,10 @@ import { Donate } from "@/components/site/Donate";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import { getPublicContent } from "@/lib/public-content.functions";
 
 export const Route = createFileRoute("/")({
+  loader: () => getPublicContent(),
   head: () => ({
     meta: [
       { title: "PRODESAR — Fundación Proyectos y Desarrollo" },
@@ -33,22 +35,32 @@ export const Route = createFileRoute("/")({
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
+  errorComponent: ({ error }) => (
+    <div className="min-h-screen flex items-center justify-center p-8 text-center">
+      <div>
+        <h1 className="text-2xl font-bold">No pudimos cargar el sitio</h1>
+        <p className="mt-2 text-muted-foreground">{error.message}</p>
+      </div>
+    </div>
+  ),
+  notFoundComponent: () => <div className="p-8">Página no encontrada.</div>,
   component: Index,
 });
 
 function Index() {
+  const content = Route.useLoaderData();
   return (
     <>
       <Navbar />
       <main>
         <Hero />
         <About />
-        <Pillars />
-        <Areas />
-        <Projects />
-        <Impact />
+        <Pillars items={content.pillars} />
+        <Areas items={content.focusAreas} />
+        <Projects items={content.projects} />
+        <Impact items={content.impact} />
         <Allies />
-        <News />
+        <News items={content.news} />
         <Donate />
         <Contact />
       </main>
