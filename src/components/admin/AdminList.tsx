@@ -42,7 +42,7 @@ export function AdminList<T extends { id: string }>({
     queryKey: ["admin", "content"],
     queryFn: () => listAdminContent(),
   });
-  const rows = (data?.[section] ?? []) as T[];
+  const rows = (data?.[section] ?? []) as unknown as T[];
 
   const [editing, setEditing] = useState<T | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
