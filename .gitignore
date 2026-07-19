@@ -30,3 +30,24 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Visual Studio
+.vs/
+*.slnx.user
+*.suo
+*.user
+*.sqlite
+
+# Visual Studio
+.vs/
+*.slnx.user
+*.suo
+*.user
+*.sqlite
+
+# Visual Studio
+.vs/
+*.slnx.user
+*.suo
+*.user
+*.sqlite
