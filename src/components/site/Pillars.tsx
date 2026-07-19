@@ -1,33 +1,18 @@
 import ambImg from "@/assets/pillar-ambiental.jpg";
 import ecoImg from "@/assets/pillar-economico.jpg";
 import socImg from "@/assets/pillar-social.jpg";
-import { TreePine, TrendingUp, Users2 } from "lucide-react";
+import { TreePine, TrendingUp, Users2, type LucideIcon } from "lucide-react";
+import type { PublicPillar } from "@/lib/public-content.functions";
 
-const pillars = [
-  {
-    icon: TreePine,
-    title: "Pilar Ambiental",
-    image: ambImg,
-    desc: "Conservar la biodiversidad y garantizar que el uso de los recursos naturales como el agua, los bosques y la energía no supere su capacidad de regeneración.",
-    tags: ["Bosques", "Agua", "Energías renovables", "Biodiversidad"],
-  },
-  {
-    icon: TrendingUp,
-    title: "Pilar Económico",
-    image: ecoImg,
-    desc: "Promover un crecimiento económico sostenible que genere oportunidades, empleo y prosperidad sin comprometer los recursos de las futuras generaciones.",
-    tags: ["Emprendimiento", "Innovación", "Productividad", "Empresa"],
-  },
-  {
-    icon: Users2,
-    title: "Pilar Social",
-    image: socImg,
-    desc: "Fomentar la inclusión, reducir las desigualdades y mejorar la calidad de vida mediante proyectos que fortalezcan a las comunidades.",
-    tags: ["Educación", "Liderazgo", "Equidad", "Bienestar"],
-  },
-];
+const KIND_META: Record<string, { icon: LucideIcon; image: string }> = {
+  ambiental: { icon: TreePine, image: ambImg },
+  economico: { icon: TrendingUp, image: ecoImg },
+  social: { icon: Users2, image: socImg },
+};
 
-export function Pillars() {
+const DEFAULTS = { icon: TreePine, image: ambImg };
+
+export function Pillars({ items }: { items: PublicPillar[] }) {
   return (
     <section id="pilares" className="py-24 bg-muted/40 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-brand-soft opacity-40" aria-hidden="true" />
@@ -45,7 +30,6 @@ export function Pillars() {
           </p>
         </div>
 
-        {/* Diagrama */}
         <div className="mt-14 flex justify-center">
           <svg viewBox="0 0 400 200" className="w-full max-w-md h-auto" aria-hidden="true">
             <defs>
@@ -64,40 +48,36 @@ export function Pillars() {
         </div>
 
         <div className="mt-16 grid md:grid-cols-3 gap-6">
-          {pillars.map(({ icon: Icon, title, image, desc, tags }) => (
-            <article
-              key={title}
-              className="group relative bg-card rounded-3xl overflow-hidden border border-border shadow-soft hover:shadow-elegant transition-all hover:-translate-y-1"
-            >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={image}
-                  alt=""
-                  loading="lazy"
-                  className="size-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-              <div className="p-6">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-brand text-primary-foreground">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <h3 className="text-xl font-bold text-foreground">{title}</h3>
+          {items.map((p) => {
+            const meta = KIND_META[p.kind.toLowerCase()] ?? DEFAULTS;
+            const Icon = meta.icon;
+            return (
+              <article
+                key={p.id}
+                className="group relative bg-card rounded-3xl overflow-hidden border border-border shadow-soft hover:shadow-elegant transition-all hover:-translate-y-1"
+              >
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={meta.image}
+                    alt=""
+                    loading="lazy"
+                    className="size-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
                 </div>
-                <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{desc}</p>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {tags.map((t) => (
-                    <li
-                      key={t}
-                      className="text-xs font-medium px-2.5 py-1 rounded-full bg-accent text-accent-foreground"
-                    >
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </article>
-          ))}
+                <div className="p-6">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-brand text-primary-foreground">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <h3 className="text-xl font-bold text-foreground">{p.title}</h3>
+                  </div>
+                  <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+                    {p.description}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

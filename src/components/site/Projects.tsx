@@ -1,36 +1,12 @@
+import { MapPin, Target, TrendingUp } from "lucide-react";
 import p1 from "@/assets/project-1.jpg";
 import p2 from "@/assets/project-2.jpg";
 import p3 from "@/assets/project-3.jpg";
-import { MapPin, Target, TrendingUp } from "lucide-react";
+import type { PublicProject } from "@/lib/public-content.functions";
 
-const projects = [
-  {
-    img: p1,
-    name: "Reforestando el Páramo",
-    location: "Boyacá, Colombia",
-    desc: "Restauración ecológica de zonas degradadas con especies nativas y participación comunitaria.",
-    objective: "Plantar 50.000 árboles en 3 años",
-    results: "12.500 árboles sembrados · 8 veredas vinculadas",
-  },
-  {
-    img: p2,
-    name: "Aulas Conectadas",
-    location: "Cauca, Colombia",
-    desc: "Educación digital y conectividad para escuelas rurales con docentes capacitados.",
-    objective: "Llegar a 30 escuelas rurales",
-    results: "18 escuelas equipadas · 1.200 estudiantes",
-  },
-  {
-    img: p3,
-    name: "Café con Propósito",
-    location: "Huila, Colombia",
-    desc: "Fortalecimiento de cooperativas cafeteras con prácticas sostenibles y comercio justo.",
-    objective: "Acompañar 200 familias productoras",
-    results: "150 familias activas · +35 % ingreso promedio",
-  },
-];
+const FALLBACK_IMAGES = [p1, p2, p3];
 
-export function Projects() {
+export function Projects({ items }: { items: PublicProject[] }) {
   return (
     <section id="proyectos" className="py-24 bg-muted/40">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -50,14 +26,14 @@ export function Projects() {
         </div>
 
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((p) => (
+          {items.map((p, i) => (
             <article
-              key={p.name}
+              key={p.id}
               className="group bg-card rounded-3xl overflow-hidden border border-border shadow-soft hover:shadow-elegant transition-all hover:-translate-y-1"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <img
-                  src={p.img}
+                  src={p.image_url ?? FALLBACK_IMAGES[i % FALLBACK_IMAGES.length]}
                   alt={p.name}
                   loading="lazy"
                   className="size-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -68,7 +44,7 @@ export function Projects() {
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-foreground">{p.name}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
+                <p className="mt-2 text-sm text-muted-foreground">{p.description}</p>
                 <dl className="mt-5 space-y-3 text-sm">
                   <div className="flex gap-2">
                     <Target className="h-4 w-4 text-primary mt-0.5 shrink-0" aria-hidden="true" />

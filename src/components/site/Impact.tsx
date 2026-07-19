@@ -1,12 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
-const stats = [
-  { value: 42, suffix: "+", label: "Comunidades beneficiadas" },
-  { value: 5800, suffix: "+", label: "Personas capacitadas" },
-  { value: 27, suffix: "", label: "Proyectos ejecutados" },
-  { value: 12500, suffix: "+", label: "Árboles sembrados" },
-  { value: 18, suffix: "", label: "Alianzas estratégicas" },
-];
+import type { PublicImpact } from "@/lib/public-content.functions";
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const [n, setN] = useState(0);
@@ -44,7 +37,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   );
 }
 
-export function Impact() {
+export function Impact({ items }: { items: PublicImpact[] }) {
   return (
     <section id="impacto" className="py-24 bg-gradient-brand text-primary-foreground relative overflow-hidden">
       <div
@@ -67,8 +60,8 @@ export function Impact() {
         </div>
 
         <dl className="mt-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-          {stats.map((s) => (
-            <div key={s.label} className="text-center">
+          {items.map((s) => (
+            <div key={s.id} className="text-center">
               <dt className="sr-only">{s.label}</dt>
               <dd className="font-display text-4xl sm:text-5xl font-extrabold">
                 <Counter value={s.value} suffix={s.suffix} />
